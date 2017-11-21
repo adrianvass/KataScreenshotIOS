@@ -16,15 +16,15 @@ class SuperHeroesViewControllerTests: ScreenshotTest {
     func testShowsEmptyCase() {
         givenThereAreNoSuperHeroes()
 
-        let viewController = getSuperHeroDetailViewController()
+        let viewController = getSuperHerosViewController()
 
         verify(viewController: viewController)
     }
     
-    func testShowTwoSuperheros() {
+    func testShowTwoSuperherosNoAvengers() {
         _ = givenThereAreSomeSuperHeroes(2, avengers: false)
 
-        let viewController = getSuperHeroDetailViewController()
+        let viewController = getSuperHerosViewController()
 
         verify(viewController: viewController)
     }
@@ -32,10 +32,27 @@ class SuperHeroesViewControllerTests: ScreenshotTest {
     func testShowTwoSuperherosAvengers() {
         _ = givenThereAreSomeSuperHeroes(2, avengers: true)
         
-        let viewController = getSuperHeroDetailViewController()
+        let viewController = getSuperHerosViewController()
         
         verify(viewController: viewController)
     }
+    
+    func testShowTenSuperherosNoAvengers() {
+        _ = givenThereAreSomeSuperHeroes(10, avengers: false)
+        
+        let viewController = getSuperHerosViewController()
+        
+        verify(viewController: viewController)
+    }
+    
+    func testShowTenSuperherosAvengers() {
+        _ = givenThereAreSomeSuperHeroes(10, avengers: true)
+        
+        let viewController = getSuperHerosViewController()
+        
+        verify(viewController: viewController)
+    }
+
 
     fileprivate func givenThereAreSomeAvengers() -> [SuperHero] {
         return givenThereAreSomeSuperHeroes(avengers: true)
@@ -58,7 +75,7 @@ class SuperHeroesViewControllerTests: ScreenshotTest {
         return superHeroes
     }
 
-    fileprivate func getSuperHeroDetailViewController() -> UIViewController {
+    fileprivate func getSuperHerosViewController() -> UIViewController {
         let superHeroesViewController = ServiceLocator()
             .provideSuperHeroesViewController() as! SuperHeroesViewController
         superHeroesViewController.presenter = SuperHeroesPresenter(
